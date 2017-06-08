@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zaduzenjeRequest xmlns="http://korenski/soap/zaduzenje"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://korenski/soap/zaduzenje file:/C:/Users/Korisnik/Documents/XMLNARODNA/src/main/resources/Zaduzenje.xsd">
+    <zahtev Id_poruke="MT900">
+        <Banka>
+            <Naziv>Vojvodjanska banka</Naziv>
+            <Swift_kod>VBUBRS22</Swift_kod>
+            <Obracunski_racun>123-1234567890123-12</Obracunski_racun>
+        </Banka>
+        <Id_poruke_naloga>MT102</Id_poruke_naloga>
+        <Datum_valute>2018-08-27T00:25:03</Datum_valute>
+        <Iznos>123000.39</Iznos>
+        <Sifra_vlute>DIN</Sifra_vlute>
+    </zahtev>
+</zaduzenjeRequest>

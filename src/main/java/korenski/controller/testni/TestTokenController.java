@@ -25,6 +25,7 @@ import korenski.repository.autorizacija.RoleRepository;
 import korenski.repository.autorizacija.UserRepository;
 import korenski.repository.institutions.BankRepository;
 import korenski.repository.klijenti.EmployeeRepository;
+import korenski.soap.NarodnaKlijent;
 
 @Controller
 public class TestTokenController {
@@ -181,4 +182,42 @@ public class TestTokenController {
 	    System.out.println("USESEN KORISNIK");
 	}
 	
+
+	@Autowired
+	NarodnaKlijent narodnaKlijent;
+	
+	@RequestMapping(
+			value = "/special/posaljiZahtevOdobrenje",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> PosaljiZahtevOdobrenje(@Context HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("SALJEM zahtev!");
+		
+		String odobrenje = narodnaKlijent.posaljiOdobrenje();
+		
+		System.out.println("Stigao odgovor!");
+		
+		System.out.println("Odgovor "+odobrenje);
+		
+		return new ResponseEntity<String>( "Sve ok", HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value = "/special/posaljiZahtevZaduzenje",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> PosaljiZahtevZaduzenje(@Context HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("SALJEM zahtev!");
+		
+		String zaduzenje = narodnaKlijent.posaljiZaduzenje();
+		
+		System.out.println("Stigao odgovor!");
+		
+		System.out.println("Odgovor "+zaduzenje);
+		
+		return new ResponseEntity<String>( "Sve ok", HttpStatus.OK);
+	}
+
 }

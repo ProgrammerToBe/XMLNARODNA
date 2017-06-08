@@ -6,7 +6,7 @@
 //
 
 
-package korenski.soap.izvestaji_model;
+package korenski.soap.zaduzenje;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the korenski.soap.izvestaji_model package. 
+ * generated in the korenski.soap.zaduzenje package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,26 +30,42 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: korenski.soap.izvestaji_model
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: korenski.soap.zaduzenje
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link IzvestajResponse }
+     * Create an instance of {@link ZaduzenjeResponse }
      * 
      */
-    public IzvestajResponse createIzvestajResponse() {
-        return new IzvestajResponse();
+    public ZaduzenjeResponse createZaduzenjeResponse() {
+        return new ZaduzenjeResponse();
     }
 
     /**
-     * Create an instance of {@link IzvestajRequest }
+     * Create an instance of {@link ZaduzenjeRequest }
      * 
      */
-    public IzvestajRequest createIzvestajRequest() {
-        return new IzvestajRequest();
+    public ZaduzenjeRequest createZaduzenjeRequest() {
+        return new ZaduzenjeRequest();
+    }
+
+    /**
+     * Create an instance of {@link Poruka }
+     * 
+     */
+    public Poruka createPoruka() {
+        return new Poruka();
+    }
+
+    /**
+     * Create an instance of {@link TBanka }
+     * 
+     */
+    public TBanka createTBanka() {
+        return new TBanka();
     }
 
 }

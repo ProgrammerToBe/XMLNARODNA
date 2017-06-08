@@ -5,5 +5,5 @@
 // Generated on: 2017.06.08 at 03:44:03 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://korenski/soap/nalozi_model", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package korenski.soap.nalozi_model;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://korenski/soap/clearing", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package korenski.soap.clearing;

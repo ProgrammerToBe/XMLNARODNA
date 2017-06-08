@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odobrenjeRequest xmlns="http://korenski/soap/odobrenje"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://korenski/soap/odobrenje file:/C:/Users/Korisnik/Documents/XMLNARODNA/src/main/resources/Odobrenje.xsd">
+    <zahtev Id_poruke="MT910">
+        <Banka>
+            <Naziv>Continental banka</Naziv>
+            <Swift_kod>CBNSRS35</Swift_kod>
+            <Obracunski_racun>123-1234567890123-12</Obracunski_racun>
+        </Banka>
+        <Id_poruke_naloga>MT102</Id_poruke_naloga>
+        <Datum_valute>2018-08-27T00:25:03</Datum_valute>
+        <Iznos>123000.39</Iznos>
+        <Sifra_vlute>DIN</Sifra_vlute>
+    </zahtev>
+</odobrenjeRequest>
