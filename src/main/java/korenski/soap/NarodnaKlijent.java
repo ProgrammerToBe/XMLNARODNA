@@ -1,6 +1,7 @@
 package korenski.soap;
 
 import java.io.File;
+import java.util.Collection;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -11,14 +12,10 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
-//import korenski.model.dto.BankaPort;
-//import korenski.repository.dtos.BankaPortRepository;
-import korenski.soap.clearing.ClearingRequest;
-import korenski.soap.clearing.ClearingResponse;
+import korenski.model.soap.BankaPort;
+import korenski.repository.soap.BankaPortRepository;
 import korenski.soap.odobrenje.OdobrenjeRequest;
 import korenski.soap.odobrenje.OdobrenjeResponse;
-import korenski.soap.rtgs.RtgsRequest;
-import korenski.soap.rtgs.RtgsResponse;
 import korenski.soap.zaduzenje.ZaduzenjeRequest;
 import korenski.soap.zaduzenje.ZaduzenjeResponse;
 
@@ -27,34 +24,79 @@ public class NarodnaKlijent {
 	@Autowired
 	private WebServiceTemplate webServiceTemplate;
 	 
-	public String posaljiOdobrenje() throws JAXBException {
+	@Autowired
+	private BankaPortRepository bankaPortRepository;
+	
+	public String posaljiOdobrenjeClearing(korenski.soap.odobrenjeclearing.OdobrenjeRequest odobrenjeRequest) throws JAXBException {
 
-		System.out.println("Pravim odobrenje!");
+		System.out.println("Pravim odobrenje Clearing!");
 		  
-		OdobrenjeRequest request = new OdobrenjeRequest();
+		korenski.soap.odobrenjeclearing.OdobrenjeRequest request = new korenski.soap.odobrenjeclearing.OdobrenjeRequest();
 	    
-		JAXBContext context = JAXBContext.newInstance("korenski.soap.odobrenje");
+		JAXBContext context = JAXBContext.newInstance("korenski.soap.odobrenjeclearing");
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		OdobrenjeRequest odobrenjereq = (OdobrenjeRequest) unmarshaller.unmarshal(new File("./files/xmls/Odobrenje.xml"));
-		  
+		//OdobrenjeRequest odobrenjereq = (OdobrenjeRequest) unmarshaller.unmarshal(new File("./files/xmls/Odobrenje.xml"));
+		
+		korenski.soap.odobrenjeclearing.OdobrenjeRequest odobrenjereq = odobrenjeRequest;
+		
+		String swiftCode = odobrenjereq.getZahtev().getPorukaElement().getBanka().getSwiftKod();
+		
+		BankaPort bp = new BankaPort();
+		bp = bankaPortRepository.findBySwiftCode(swiftCode);
 		
 		request.setZahtev(odobrenjereq.getZahtev());
-		  
-		System.out.println("Saljem odobrenje!");
+		
+		System.out.println("Saljem odobrenje Clearing!");
 						
-		webServiceTemplate.setDefaultUri("http://localhost:8080/ws_poslovne/odobrenje");
-		webServiceTemplate.setMarshaller(jaxb2Marshaller("korenski.soap.odobrenje"));
-		webServiceTemplate.setUnmarshaller(jaxb2Marshaller("korenski.soap.odobrenje"));
+		webServiceTemplate.setDefaultUri("http://localhost:" + bp.getPort() + "/ws_poslovne/odobrenjeclearing");
+		webServiceTemplate.setMarshaller(jaxb2Marshaller("korenski.soap.odobrenjeclearing"));
+		webServiceTemplate.setUnmarshaller(jaxb2Marshaller("korenski.soap.odobrenjeclearing"));
 			   
 			
 			
-		OdobrenjeResponse odgovor = (OdobrenjeResponse) webServiceTemplate.marshalSendAndReceive(request);
+		korenski.soap.odobrenjeclearing.OdobrenjeResponse odgovor = (korenski.soap.odobrenjeclearing.OdobrenjeResponse) webServiceTemplate.marshalSendAndReceive(request);
 		
-		System.out.println("Stigao odgovor!");
+		System.out.println("Stigao odgovor Clearing!");
 
 		   
 		return odgovor.getOdgovor();
 	  }
+	
+	public String posaljiOdobrenjeRtgs(korenski.soap.odobrenjertgs.OdobrenjeRequest odobrenjeRequest) throws JAXBException {
+
+		System.out.println("Pravim odobrenje RTGS!");
+		  
+		korenski.soap.odobrenjertgs.OdobrenjeRequest request = new korenski.soap.odobrenjertgs.OdobrenjeRequest();
+	    
+		JAXBContext context = JAXBContext.newInstance("korenski.soap.odobrenjertgs");
+		Unmarshaller unmarshaller = context.createUnmarshaller();
+		//OdobrenjeRequest odobrenjereq = (OdobrenjeRequest) unmarshaller.unmarshal(new File("./files/xmls/Odobrenje.xml"));
+		
+		korenski.soap.odobrenjertgs.OdobrenjeRequest odobrenjereq = odobrenjeRequest;
+		
+		String swiftCode = odobrenjereq.getZahtev().getPorukaElement().getBanka().getSwiftKod();
+		
+		BankaPort bp = new BankaPort();
+		bp = bankaPortRepository.findBySwiftCode(swiftCode);
+		
+		request.setZahtev(odobrenjereq.getZahtev());
+		  
+		System.out.println("Saljem odobrenje RTGS!");
+						
+		webServiceTemplate.setDefaultUri("http://localhost:" + bp.getPort() + "/ws_poslovne/odobrenjertgs");
+		webServiceTemplate.setMarshaller(jaxb2Marshaller("korenski.soap.odobrenjertgs"));
+		webServiceTemplate.setUnmarshaller(jaxb2Marshaller("korenski.soap.odobrenjertgs"));
+			   
+			
+			
+		korenski.soap.odobrenjertgs.OdobrenjeResponse odgovor = (korenski.soap.odobrenjertgs.OdobrenjeResponse) webServiceTemplate.marshalSendAndReceive(request);
+		
+		System.out.println("Stigao odgovor RTGS!");
+
+		   
+		return odgovor.getOdgovor();
+	  }
+
 	 
 	public String posaljiZaduzenje() throws JAXBException {
 
@@ -66,12 +108,16 @@ public class NarodnaKlijent {
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		ZaduzenjeRequest zaduzenjereq = (ZaduzenjeRequest) unmarshaller.unmarshal(new File("./files/xmls/Zaduzenje.xml"));
 		  
+		String swiftCode = zaduzenjereq.getZahtev().getBanka().getSwiftKod();
+		BankaPort bp = bankaPortRepository.findBySwiftCode(swiftCode);
+		
+		
 		
 		request.setZahtev(zaduzenjereq.getZahtev());
 			  
 		System.out.println("Saljem zaduzenje!");
 			
-		webServiceTemplate.setDefaultUri("http://localhost:8080/ws_poslovne/zaduzenje");
+		webServiceTemplate.setDefaultUri("http://localhost:" + bp.getPort() + "/ws_poslovne/zaduzenje");
 		webServiceTemplate.setMarshaller(jaxb2Marshaller("korenski.soap.zaduzenje"));
 		webServiceTemplate.setUnmarshaller(jaxb2Marshaller("korenski.soap.zaduzenje"));
 			   

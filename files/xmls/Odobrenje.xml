@@ -5,7 +5,7 @@
     <zahtev Id_poruke="MT910">
         <Banka>
             <Naziv>Continental banka</Naziv>
-            <Swift_kod>CBNSRS35</Swift_kod>
+            <Swift_kod>CBNSRS01</Swift_kod>
             <Obracunski_racun>123-1234567890123-12</Obracunski_racun>
         </Banka>
         <Id_poruke_naloga>MT102</Id_poruke_naloga>

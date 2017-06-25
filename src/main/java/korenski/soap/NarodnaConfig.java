@@ -87,19 +87,34 @@ public class NarodnaConfig extends WsConfigurerAdapter {
 		return new SimpleXsdSchema(new ClassPathResource("Clearing.xsd"));
 	}
 	
-	@Bean(name = "odobrenje")
-	public DefaultWsdl11Definition defaultWsdl11DefinitionOdobrenje(XsdSchema odobrenjeSchema) {
+	@Bean(name = "odobrenjeClearing")
+	public DefaultWsdl11Definition defaultWsdl11DefinitionOdobrenjeClearing(XsdSchema odobrenjeClearingSchema) {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
 		wsdl11Definition.setPortTypeName("PoslovnaPort");
 		wsdl11Definition.setLocationUri("/ws_poslovne");
-		wsdl11Definition.setTargetNamespace("http://korenski/soap/odobrenje");
-		wsdl11Definition.setSchema(odobrenjeSchema);
+		wsdl11Definition.setTargetNamespace("http://korenski/soap/odobrenjeClearing");
+		wsdl11Definition.setSchema(odobrenjeClearingSchema);
 		return wsdl11Definition;
 	}
 
 	@Bean
-	public XsdSchema odobrenjeSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("Odobrenje.xsd"));
+	public XsdSchema odobrenjeClearingSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("OdobrenjeClearing.xsd"));
+	}
+	
+	@Bean(name = "odobrenjeRtgs")
+	public DefaultWsdl11Definition defaultWsdl11DefinitionOdobrenjeRtgs(XsdSchema odobrenjeRtgsSchema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("PoslovnaPort");
+		wsdl11Definition.setLocationUri("/ws_poslovne");
+		wsdl11Definition.setTargetNamespace("http://korenski/soap/odobrenjeRtgs");
+		wsdl11Definition.setSchema(odobrenjeRtgsSchema);
+		return wsdl11Definition;
+	}
+
+	@Bean
+	public XsdSchema odobrenjeRtgsSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("OdobrenjeRtgs.xsd"));
 	}
 	
 	@Bean(name = "zaduzenje")

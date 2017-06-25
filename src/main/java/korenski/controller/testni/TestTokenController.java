@@ -186,6 +186,7 @@ public class TestTokenController {
 	@Autowired
 	NarodnaKlijent narodnaKlijent;
 	
+	/*
 	@RequestMapping(
 			value = "/special/posaljiZahtevOdobrenje",
 			method = RequestMethod.GET,
@@ -194,7 +195,7 @@ public class TestTokenController {
 		
 		System.out.println("SALJEM zahtev!");
 		
-		String odobrenje = narodnaKlijent.posaljiOdobrenje();
+		//String odobrenje = narodnaKlijent.posaljiOdobrenje();
 		
 		System.out.println("Stigao odgovor!");
 		
@@ -202,7 +203,7 @@ public class TestTokenController {
 		
 		return new ResponseEntity<String>( "Sve ok", HttpStatus.OK);
 	}
-	
+	*/
 	@RequestMapping(
 			value = "/special/posaljiZahtevZaduzenje",
 			method = RequestMethod.GET,

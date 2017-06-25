@@ -313,3 +313,13 @@ insert into racun values ('4', '123-7184821064803-82', null, '2013-05-07 19:05:0
 insert into zatvaranje_racuna values ('1', '2017-04-30 19:05:00', '123-7184821064803-82', '1');
 
 insert into activity values('1', 'IOP', 'Ipoppop');
+
+
+insert into message values ('1', 'MT102');
+insert into message values ('2', 'MT103');
+insert into message values ('3', 'MT202');
+insert into message values ('4', 'MT900');
+insert into message values ('5', 'MT910');
+
+insert into banka_port values('1', '111-1234567890123-12', '8085', 5000000.12, 'VBUBRS01');
+insert into banka_port values('2', '111-1234567990123-12', '8086', 5000000.12, 'CBNSRS01');
